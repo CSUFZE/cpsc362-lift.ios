@@ -3,7 +3,9 @@ import { StyleSheet, View } from 'react-native';
 
 import ParallaxScrollView from '@/components/parallax-scroll-view';
 import { ThemedText } from '@/components/themed-text';
+import { Collapsible } from '@/components/ui/collapsible';
 import { TopBar } from '@/components/ui/top-bar';
+import workouts from '@/data/workouts.json';
 
 export default function HomeScreen() {
   return (
@@ -22,6 +24,16 @@ export default function HomeScreen() {
             </View>
           </View>
         }>
+        {workouts.map((group, i) => (
+          <Collapsible key={i} title={group.title}>
+            {group.exercises.map((exercise, j) => (
+              <ThemedText key={j}>
+                {exercise.sets} sets - {exercise.name}
+                {exercise.equipment ? ` (${exercise.equipment})` : ""}
+              </ThemedText>
+            ))}
+          </Collapsible>
+        ))}
       </ParallaxScrollView>
     </View>
   );
