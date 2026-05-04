@@ -1,45 +1,82 @@
 import { PropsWithChildren, useState } from 'react';
-import { StyleSheet, TouchableOpacity } from 'react-native';
+import { Image, ImageSourcePropType, StyleSheet, TouchableOpacity, View } from 'react-native';
 
 import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
 import { IconSymbol } from '@/components/ui/icon-symbol';
-import { Colors } from '@/constants/theme';
-import { useColorScheme } from '@/hooks/use-color-scheme';
 
-export function Collapsible({ children, title }: PropsWithChildren & { title: string }) {
+type CollapsibleProps = PropsWithChildren & {
+  title: string;
+  image?: ImageSourcePropType;
+};
+
+export function Collapsible({ children, title, image }: CollapsibleProps) {
   const [isOpen, setIsOpen] = useState(false);
-  const theme = useColorScheme() ?? 'light';
 
   return (
-    <ThemedView>
+    <View style={styles.card}>
       <TouchableOpacity
         style={styles.heading}
         onPress={() => setIsOpen((value) => !value)}
-        activeOpacity={0.8}>
+        activeOpacity={0.8}
+      >
+        {image && <Image source={image} style={styles.cardImage} />}
+
+        <View style={styles.textArea}>
+          <ThemedText style={styles.titleText}>{title}</ThemedText>
+          <ThemedText style={styles.smallText}>Time:</ThemedText>
+          <ThemedText style={styles.smallText}>PR:</ThemedText>
+        </View>
+
         <IconSymbol
           name="chevron.right"
           size={18}
-          weight="medium"
-          color={theme === 'light' ? Colors.light.icon : Colors.dark.icon}
+          color="#111827"
           style={{ transform: [{ rotate: isOpen ? '90deg' : '0deg' }] }}
         />
-
-        <ThemedText type="defaultSemiBold">{title}</ThemedText>
       </TouchableOpacity>
-      {isOpen && <ThemedView style={styles.content}>{children}</ThemedView>}
-    </ThemedView>
+
+      {isOpen && <View style={styles.content}>{children}</View>}
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
+  card: {
+    backgroundColor: '#D9ECFA',
+    borderRadius: 14,
+    marginBottom: 12,
+    borderWidth: 1,
+    borderColor: '#111827',
+    overflow: 'hidden',
+  },
   heading: {
+    minHeight: 92,
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 6,
+    padding: 10,
+  },
+  cardImage: {
+    width: 95,
+    height: 75,
+    borderRadius: 10,
+    marginRight: 12,
+    backgroundColor: '#C7DDED',
+  },
+  textArea: {
+    flex: 1,
+    alignItems: 'flex-end',
+  },
+  titleText: {
+    fontSize: 18,
+    fontWeight: '700',
+    marginBottom: 4,
+  },
+  smallText: {
+    fontSize: 13,
   },
   content: {
-    marginTop: 6,
-    marginLeft: 24,
+    paddingHorizontal: 16,
+    paddingBottom: 14,
+    paddingTop: 8,
   },
 });

@@ -20,7 +20,7 @@ export function TopBar() {
       </View>
 
       {/* RIGHT SIDE ICON */}
-      <TouchableOpacity onPress={() => router.push('/modal')}>
+      <TouchableOpacity style={styles.iconButton} onPress={() => router.push('/settings')}>
         <Ionicons name="settings-outline" size={26} />
       </TouchableOpacity>
 
