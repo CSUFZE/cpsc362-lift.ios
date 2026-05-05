@@ -7,10 +7,9 @@ export function TopBar() {
 
   return (
     <View style={styles.topBar}>
-      {/* LEFT SIDE EMPTY SO SETTINGS STAYS RIGHT */}
+      //Leave the left side empty so the settings is pushed to the right
       <View />
 
-      {/* RIGHT SIDE SETTINGS ONLY */}
       <TouchableOpacity
         style={styles.iconButton}
         onPress={() => router.push('/settings')}
