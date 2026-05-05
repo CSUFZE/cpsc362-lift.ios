@@ -7,23 +7,15 @@ export function TopBar() {
 
   return (
     <View style={styles.topBar}>
-      
-      {/* LEFT SIDE ICONS */}
-      <View style={styles.leftIcons}>
-        <TouchableOpacity onPress={() => router.push('/modal')}>
-          <Ionicons name="calendar-outline" size={26} />
-        </TouchableOpacity>
+      //Leave the left side empty so the settings is pushed to the right
+      <View />
 
-        <TouchableOpacity onPress={() => router.push('/modal')}>
-          <Ionicons name="filter-outline" size={26} />
-        </TouchableOpacity>
-      </View>
-
-      {/* RIGHT SIDE ICON */}
-      <TouchableOpacity style={styles.iconButton} onPress={() => router.push('/settings')}>
-        <Ionicons name="settings-outline" size={26} />
+      <TouchableOpacity
+        style={styles.iconButton}
+        onPress={() => router.push('/settings')}
+      >
+        <Ionicons name="settings-outline" size={24} color="#111827" />
       </TouchableOpacity>
-
     </View>
   );
 }
@@ -33,14 +25,14 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingHorizontal: 25,
-    paddingVertical: 12,
-    backgroundColor: '#e5e5e5',
-    borderBottomWidth: 2,
-    borderBottomColor: '#000',
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    backgroundColor: '#FFFFFF',
+    borderBottomWidth: 1,
+    borderBottomColor: '#E5E7EB',
   },
-  leftIcons: {
-    flexDirection: 'row',
-    gap: 18, // space between calendar & filter
+  iconButton: {
+    padding: 6,
+    borderRadius: 8,
   },
 });
