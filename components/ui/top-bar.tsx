@@ -7,7 +7,7 @@ export function TopBar() {
 
   return (
     <View style={styles.topBar}>
-      //Leave the left side empty so the settings is pushed to the right
+      {/* //Leave the left side empty so the settings is pushed to the right */}
       <View />
 
       <TouchableOpacity
